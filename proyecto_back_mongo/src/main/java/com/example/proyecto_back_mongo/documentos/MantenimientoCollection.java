@@ -1,18 +1,23 @@
 package com.example.proyecto_back_mongo.documentos;
 
 import lombok.Data;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "coleccion_mantenimiento")
+import java.time.LocalDate;
+
+@Document(collection = "Mantenimientos")
 @Data
 public class MantenimientoCollection {
 
     @Id
+    @Indexed(unique = true)
     private int id_mantenimiento;
     private String problema;
-    private String solucion;
-    private String fecha_llegada_problema;
-    private String fecha_solucion_problema;
+    private String posible_solucion;
+    private LocalDate fecha_llegada_problema;
+    private LocalDate fecha_posiblesolucion_problema;
     private String dias_espera_solucion;
 }
