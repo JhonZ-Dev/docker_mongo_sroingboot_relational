@@ -23,4 +23,7 @@ public class MantenimientoCollection {
     private LocalDate fecha_posiblesolucion_problema;
     private String dias_espera_solucion;
 
+    @DBRef
+    private CostoMantenimiento costoMantenimiento;
+
 }
