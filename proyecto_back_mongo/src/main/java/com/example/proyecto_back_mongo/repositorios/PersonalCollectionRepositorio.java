@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface PersonalCollectionRepositorio extends MongoRepository<PersonalCollection, Integer>
 {
     @Query(value = "{}", sort = "{id_personal: -1}")
-    Optional<MantenimientoCollection> findTopByOrderByIdPersonalDesc();
+    Optional<PersonalCollection> findTopByOrderByIdPersonalDesc();
 }
