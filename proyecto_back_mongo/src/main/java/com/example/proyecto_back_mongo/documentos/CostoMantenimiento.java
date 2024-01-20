@@ -20,6 +20,8 @@ public class CostoMantenimiento {
     private LocalDate fecha_llegada_problema;
     private LocalDate fecha_posiblesolucion_problema;
     private String precio_final_por_dias;
+    @Indexed
+    private int id_mantenimiento; // Referencia al id_mantenimiento en la otra colección
 
 
 }
