@@ -17,11 +17,11 @@ public class CostoMantenimiento {
     @Indexed(unique = true)
     private int id_costos;
     private String descripcion;
-    private String materiales_implementados;
     private Double costo_inicial = 0.0;
     private LocalDate fecha_llegada_problema;
     private LocalDate fecha_posiblesolucion_problema;
     private String precio_final_por_dias;
+    private double ivaPorcentaje  = 0.12;
 
 
     //relacion de uno a muchos con Mantenimientos
