@@ -1,13 +1,16 @@
 package com.example.proyecto_back_mongo.servicios;
 
 import com.example.proyecto_back_mongo.documentos.MantenimientoCollection;
+import com.example.proyecto_back_mongo.documentos.UsuariosMantenimientoColletion;
 import com.example.proyecto_back_mongo.repositorios.MantenimientoRepositorio;
+import com.example.proyecto_back_mongo.repositorios.UsuariosRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class MantenimientoServices {
     @Autowired
     public MantenimientoRepositorio repositorio;
+    @Autowired
+    public UsuariosRepositorio usuariosRepositorio;
     //metodo para guardar
 
     public MantenimientoCollection guardar(MantenimientoCollection collection){
@@ -23,6 +28,25 @@ public class MantenimientoServices {
         //calcular
         calcularDiasEsperaSolucion(collection);
         return repositorio.save(collection);
+    }
+
+    public MantenimientoCollection guardarConUsuario(MantenimientoCollection collection, Integer id_usuario){
+        //generar el nuevo id para Mantenimiento
+        collection.setId_mantenimiento(generarNuevoId());
+        //buscar el usuario por su id
+        Optional<UsuariosMantenimientoColletion> optional = usuariosRepositorio.findById(Long.valueOf(id_usuario));
+
+        //verificar si existe
+        if(optional.isPresent()){
+            UsuariosMantenimientoColletion usuariosMantenimientoColletion = optional.get();
+            //asiganr el usuario a la lista de Mantenimientos
+            collection.setId_usuario(Collections.singletonList(usuariosMantenimientoColletion));
+            //guardar el mantenimiento
+            calcularDiasEsperaSolucion(collection);
+            return repositorio.save(collection);
+        }else{
+            throw new RuntimeException("Usuario con id" +id_usuario + " no encontrado");
+        }
     }
 
     //metodo para listar
