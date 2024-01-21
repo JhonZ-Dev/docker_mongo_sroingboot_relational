@@ -103,7 +103,7 @@ public class UsuarioServices {
     }
 
     //traerPorId
-    Optional<UsuariosMantenimientoColletion> traerPorId(Integer id_usuario){
+    public Optional<UsuariosMantenimientoColletion> traerPorId(Integer id_usuario){
         return repositorio.findById(Long.valueOf(id_usuario));
     }
 
