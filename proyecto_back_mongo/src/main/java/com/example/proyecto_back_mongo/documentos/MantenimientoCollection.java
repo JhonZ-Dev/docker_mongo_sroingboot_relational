@@ -26,4 +26,8 @@ public class MantenimientoCollection {
     @DBRef
     private CostoMantenimiento costoMantenimiento;
 
+    //relacion de uno a muchos con Usuarios
+    @DBRef
+    private List<UsuariosMantenimientoColletion> id_usuario;
+
 }
