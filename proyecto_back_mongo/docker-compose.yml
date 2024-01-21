@@ -11,8 +11,6 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo_db:27017/proyectou2mongo
     depends_on:
       - mongo_db
-    networks:
-      - my_custom_network
     volumes:
       - mongo_app_data:/app/data
 
@@ -21,14 +19,8 @@ services:
     image: mongo:latest
     ports:
       - 27020:27017
-    networks:
-      - my_custom_network
     volumes:
       - mongo_data:/data/db
-
-networks:
-  my_custom_network:
-    driver: bridge
 
 volumes:
   mongo_app_data:
