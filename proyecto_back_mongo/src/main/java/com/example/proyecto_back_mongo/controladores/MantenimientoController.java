@@ -41,4 +41,11 @@ public class MantenimientoController {
     public Optional<MantenimientoCollection> traerPorSuId(@PathVariable Integer id_mantenimiento){
         return services.traerPorId(id_mantenimiento);
     }
+    @PostMapping("/guardar/{id_usuario}")
+    public MantenimientoCollection guardarConUsuario(@RequestBody MantenimientoCollection collection,
+                                                     @PathVariable Integer id_usuario){
+        return services.guardarConUsuario(collection,id_usuario);
+    }
+
+
 }
