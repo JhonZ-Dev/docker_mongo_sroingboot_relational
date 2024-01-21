@@ -51,7 +51,8 @@ public class MantenimientoServices {
     }
 
     private MantenimientoCollection buscarPorId(Long id_mantenimiento){
-        MantenimientoCollection mantenimientoCollection = this.repositorio.findById(Math.toIntExact(id_mantenimiento)).orElse(null);
+        MantenimientoCollection mantenimientoCollection =
+                this.repositorio.findById(Math.toIntExact(id_mantenimiento)).orElse(null);
         return mantenimientoCollection;
     }
 
