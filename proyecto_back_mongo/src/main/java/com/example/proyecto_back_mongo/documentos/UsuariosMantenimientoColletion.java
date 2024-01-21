@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.annotation.Collation;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Usuarios")
@@ -15,5 +16,9 @@ public class UsuariosMantenimientoColletion {
     private String nombre_usuario;
     private String contrasenia_usuario;
     private String rol_usuario;
+
+    //relacion de muchos a uno con mantenimiento
+    @DBRef
+    private MantenimientoCollection mantenimientoCollection;
 
 }
