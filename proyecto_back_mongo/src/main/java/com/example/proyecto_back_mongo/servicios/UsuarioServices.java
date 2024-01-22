@@ -69,7 +69,7 @@ public class UsuarioServices {
             return actualizarEnMongoDB(existe, usuariosMantenimientoColletion);
         } else {
             // Si no es mantenimiento, enviar a PostgreSQL
-            return enviarAPostgreSQL(usuariosMantenimientoColletion);
+            throw new RuntimeException("Error al enviar la solicitud a Postgres");
         }
     }
 
@@ -86,7 +86,7 @@ public class UsuarioServices {
     }
 
     private UsuariosMantenimientoColletion enviarAPostgreSQL(UsuariosMantenimientoColletion usuariosMantenimientoColletion) {
-        String urlPostgres = "http://172.18.0.3:8081/datos/restTemplate/insertar";
+        String urlPostgres = "http://172.18.0.4:8080/api/usuarios/guardar";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<UsuariosMantenimientoColletion> requestEntity = new HttpEntity<>(usuariosMantenimientoColletion, headers);
@@ -111,6 +111,20 @@ public class UsuarioServices {
     public void eliminar(Integer id_usuario){
         repositorio.deleteById(Long.valueOf(id_usuario));
     }
+
+    public String traerListaUsuarios() {
+        String urlUsuarios = "http://localhost:8080/api/usuarios/listat";
+
+        try {
+            String response = restTemplate.getForObject(urlUsuarios, String.class);
+            log.info("Respuesta de la lista de usuarios: {}", response);
+            return response;
+        } catch (RestClientException e) {
+            log.error("Error al obtener la lista de usuarios", e);
+            throw new RuntimeException("Error al obtener la lista de usuarios", e);
+        }
+    }
+
 
 
 }
