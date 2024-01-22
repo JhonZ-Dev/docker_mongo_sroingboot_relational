@@ -41,4 +41,9 @@ public class UsuarioControlador {
         return services.traerPorId(id_usuario);
     }
 
+    @GetMapping("/traer-datos-desde-postgres")
+    public String traerListaUsuarios(){
+        return services.traerListaUsuarios();
+    }
+
 }
